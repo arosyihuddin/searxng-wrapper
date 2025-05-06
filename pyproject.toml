@@ -1,0 +1,22 @@
+[project]
+name = "searxng-wrapper"
+version = "0.1.0"
+description = "searxng-wrapper is a simple Python wrapper for interacting with SearXNG , a privacy-focused meta search engine. This library allows you to perform searches and retrieve structured results easily, without manually handling HTTP requests."
+authors = [
+    {name = "arosyihuddin",email = "arosyihuddin6@gmail.com"}
+]
+packages = [{include = "searxng_wrapper", from = "src"}]
+license = {text = "MIT"}
+readme = "README.md"
+requires-python = ">=3.12"
+dependencies = [
+    "colorama (>=0.4.6,<0.5.0)",
+    "requests (>=2.32.3,<3.0.0)",
+    "pydantic (>=2.11.4,<3.0.0)",
+    "aiohttp (>=3.11.18,<4.0.0)"
+]
+
+
+[build-system]
+requires = ["poetry-core>=2.0.0,<3.0.0"]
+build-backend = "poetry.core.masonry.api"

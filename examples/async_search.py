@@ -9,7 +9,7 @@ async def main():
 
     result = await client.asearch(
         q="SearXNG",
-        language="all",
+        language="auto",
         categories="general",
         safesearch="off",
         page=1,

@@ -36,7 +36,7 @@ class SearxngWrapper:
             "categories": categories,
             "page": page,
             "safesearch": SAFESEARCH_MAP[safesearch],
-            "time_range": None if time_range == "all" else time_range,
+            "time_range": "" if time_range == "all" else time_range,
         }
 
         if disabled_engines:
@@ -68,10 +68,10 @@ class SearxngWrapper:
     async def asearch(
         self,
         q: str,
-        language: Language,
-        categories: Category,
-        page: int,
-        safesearch: SafeSearch = "off",
+        language: Optional[Language] = "auto",
+        categories: Optional[Category] = "general",
+        page: Optional[int] = 1,
+        safesearch: Optional[SafeSearch] = "off",
         time_range: Optional[TimeRange] = "all",
         max_results: Optional[int] = None,
         enabled_engines: Optional[List[EngineName]] = None,
@@ -84,7 +84,7 @@ class SearxngWrapper:
             "categories": categories,
             "page": page,
             "safesearch": SAFESEARCH_MAP[safesearch],
-            "time_range": None if time_range == "all" else time_range,
+            "time_range": "" if time_range == "all" else time_range,
         }
 
         if disabled_engines:

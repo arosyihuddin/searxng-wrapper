@@ -28,9 +28,7 @@ async def main():
     )
 
     result = await client.asearch(
-        q="SearXNG",
-        language="all",
-        categories="general"
+        q="SearXNG"
     )
     print(result)
 
@@ -49,10 +47,7 @@ if __name__ == "__main__":
     )
 
     result = client.search(
-        q="SearXNG",
-        language="auto",
-        categories="social media",
-        safesearch="off"
+        q="SearXNG"
     )
 
     print(result)

@@ -25,6 +25,7 @@ class SearxngWrapper:
         page: Optional[int] = 1,
         safesearch: Optional[SafeSearch] = "off",
         time_range: Optional[TimeRange] = "all",
+        max_results: Optional[int] = None,
         enabled_engines: Optional[List[EngineName]] = None,
         disabled_engines: Optional[List[EngineName]] = None
     ) -> SearchResponse:
@@ -58,7 +59,7 @@ class SearxngWrapper:
             return SearchResponse(
                 query=q,
                 number_of_results=results["number_of_results"],
-                results=results["results"]
+                results=results["results"][:max_results]
             )
 
         except requests.exceptions.RequestException as e:
@@ -70,7 +71,11 @@ class SearxngWrapper:
         language: Language,
         categories: Category,
         page: int,
-        safesearch: SafeSearch = SAFESEARCH_MAP["off"]
+        safesearch: SafeSearch = "off",
+        time_range: Optional[TimeRange] = "all",
+        max_results: Optional[int] = None,
+        enabled_engines: Optional[List[EngineName]] = None,
+        disabled_engines: Optional[List[EngineName]] = None
     ) -> SearchResponse:
         params = {
             "q": q,
@@ -78,8 +83,15 @@ class SearxngWrapper:
             "lenguage": language,
             "categories": categories,
             "page": page,
-            "safesearch": SAFESEARCH_MAP[safesearch]
+            "safesearch": SAFESEARCH_MAP[safesearch],
+            "time_range": None if time_range == "all" else time_range,
         }
+
+        if disabled_engines:
+            params["disabled_engines"] = ",".join(disabled_engines)
+
+        if enabled_engines:
+            params["enabled_engines"] = ",".join(enabled_engines)
 
         headers = {
             "User-Agent": "Mozilla/5.0 (X11; Linux x86_64)",
@@ -96,7 +108,7 @@ class SearxngWrapper:
                     return SearchResponse(
                         query=q,
                         number_of_results=data["number_of_results"],
-                        results=data["results"]
+                        results=data["results"][:max_results]
                     )
         except aiohttp.ClientError as e:
             self.logger.error(f"Request failed: {e}")

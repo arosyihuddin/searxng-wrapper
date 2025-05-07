@@ -2,12 +2,12 @@ from searxng_wrapper import SearxngWrapper
 
 if __name__ == "__main__":
     client = SearxngWrapper(
-        base_url="https://search.arosyihuddin.site",
+        base_url="https://gatotkaca.arosyihuddin.site",
         log_level="DEBUG"
     )
 
     result = client.search(
-        q="meta",
+        q="SearXNG",
         language="auto",
         categories="social media",
         safesearch="off",
